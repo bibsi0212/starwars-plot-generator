@@ -15,12 +15,12 @@ class App extends React.Component {
     this.setState({
       isDarkSide: !isDarkSide,
     });
-  }
+  };
 
   render({ isDarkSide } = this.state) {
     return (
       <div className={`wrapper-outer ${isDarkSide ? 'dark-side' : ''}`}>
-        <div className="wrapper-inner container col-12 col-sm-10 col-md-8 col-lg-6 text-center">
+        <div className="wrapper-inner mx-auto col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 text-center">
           <Header toggleDarkSide={this.toggleDarkSide} isDarkSide={isDarkSide} />
           <PlotGenerator />
         </div>
