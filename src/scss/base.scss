@@ -1,114 +1,98 @@
-@import "~bootstrap/scss/bootstrap";
 @import "./variables";
+@import "~bootstrap/scss/bootstrap";
+
+
+// Wrappers
 
 .wrapper-outer {
-  background-image: none;
-  transition: background-image 0.3s;
-
-  &.dark-side {
-    background-image: url("../img/bg-stars.png");
-    background-size: contain;
-    background-position: top center;
-    min-height: 100vh;
-
-    .wrapper-inner {
-      color: #fff;
-    }
-
-    .main-button {
-      color: white;
-      border-color: white;
-
-      &:hover {
-        color: black;
-      }
-    }
-
-    .text-highlight {
-      color: black;
-    }
-  }
+  min-height: 100vh;
+  z-index: 1;
 }
 
-.header {
-  margin-bottom: 2rem;
+.wrapper-inner {
+  z-index: 2;
 }
+
+
+// Header
 
 .header-text {
   text-align: center;
 }
 
 .header-logo {
-  height: 150px;
-  width: 150px;
+  appearance: none;
   background: none;
   border: none;
-  appearance: none;
+  height: $header-logo-size;
+  width: $header-logo-size;
 
   svg {
+    filter: $header-logo-shadow;
     height: 100%;
     width: 100%;
-    -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.2));
-    filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.2));
   }
 }
 
-.plot-container {
-  margin-top: 2rem;
 
+// Plot
+
+.loading-spinner {
+  display: block;
+  height: $loading-spinner-size;
+  margin: $loading-spinner-margin;
+  width: $loading-spinner-size;
+}
+
+.plot-select {
+  color: $body-color;
+}
+
+.plot-container {
   .text-highlight {
-    position: relative;
-    margin: 0 10px;
-    min-width: 30px;
-    white-space: nowrap;
-    z-index: 1;
     font-weight: $font-weight-bold;
+    margin: 0 $text-highlight-spacing-x;
+    position: relative;
+    white-space: nowrap;
 
     &::before {
+      background-color: $text-highlight-color;
       content: " ";
-      background-color: rgba(#ffe81f, 1);
-      width: calc(100% + 10px);
-      position: absolute;
       height: 120%;
-      left: -5px;
+      left: -($text-highlight-spacing-x / 2);
+      position: absolute;
       top: 0;
-      transform: skewX(-15deg);
+      transform: skewX($text-highlight-skew-amount);
+      width: calc(100% + #{$text-highlight-spacing-x});
       z-index: -1;
     }
   }
 }
 
-.loading-spinner {
-  display: block;
-  height: 90px;
-  margin: 0 auto 2rem;
-  width: 80px;
-}
-
 .main-button {
-  color: inherit;
   background: none;
-  border: 1px solid black;
-  padding: 1rem;
-  margin: 2rem 0;
-  position: relative;
+  border: $main-button-border;
+  color: inherit;
+  margin: $main-button-margin;
   overflow: hidden;
-  z-index: 1;
-  transition: color 0.3s;
+  padding: $main-button-padding;
+  position: relative;
+  text-transform: uppercase;
+  transition: $main-button-transition;
 
   &::after {
+    background-color: $main-button-hover-highlight-color;
     content: " ";
-    position: absolute;
-    width: 100%;
     height: 0;
-    top: 50%;
     left: 50%;
-    background: #ffe81f;
     opacity: 0;
+    position: absolute;
+    top: 50%;
     transform: translateX(-50%) translateY(-50%) rotate(45deg);
-    z-index: -1;
-    transition: all 0.3s;
     transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+    transition: height 0.3s, opacity 0.3s;
+    width: 100%;
+    z-index: -1;
   }
 
   &:hover {
@@ -119,31 +103,28 @@
   }
 }
 
-.swagmode {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: black;
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  overflow: hidden;
-  z-index: 3;
 
-  div {
-    display: flex;
-    justify-content: center;
-    /* This is a magic number based on the context in which this snippet is used and effects the perspective */
-    height: 800px;
-    /* This sets allows us to transform the text on a 3D plane, and is somewhat a magic number */
-    perspective: 400px;
-    /* The rest is totally up to personal styling preferences */
-    color: #feda4a;
-    font-family: "Pathway Gothic One", sans-serif;
-    font-size: 500%;
-    font-weight: 600;
-    letter-spacing: 6px;
-    line-height: 150%;
-    text-align: justify;
+// Dark Side
+
+.dark-side {
+  background-image: $dark-side-bg;
+  background-position: top center;
+  background-size: contain;
+
+  .wrapper-inner {
+    color: $dark-side-body-color;
+  }
+
+  .main-button {
+    border-color: $main-button-color-dark-side;
+    color: $main-button-color-dark-side;
+
+    &:hover {
+      color: $main-button-color-hover-dark-side;
+    }
+  }
+
+  .text-highlight {
+    color: $text-highlight-color-dark-side;
   }
 }

@@ -1,0 +1,43 @@
+// Variables
+
+$black:                               #333333;
+$body-color:                          $black;
+$accent-color:                        #ffe81f;
+
+
+// Header
+
+$header-logo-size:                    150px;
+$header-logo-shadow:                  drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.2));
+
+
+// Loading Spinner
+
+$loading-spinner-size:                90px;
+$loading-spinner-margin:              0 auto 2rem;
+
+
+// Text Highlight
+
+$text-highlight-spacing-x:            10px;
+$text-highlight-color:                $accent-color;
+$text-highlight-skew-amount:          -15deg;
+
+
+// Main Button
+
+$main-button-color:                   $body-color;
+$main-button-border:                  1px solid $main-button-color;
+$main-button-margin:                  2rem 0;
+$main-button-padding:                 1rem;
+$main-button-transition:              color .3s, border-color .3s;
+$main-button-hover-highlight-color:   $accent-color;
+
+
+// Dark Side
+
+$dark-side-bg:                        url("../img/bg-stars.png");
+$dark-side-body-color:                #ffffff;
+$main-button-color-dark-side:         $dark-side-body-color;
+$main-button-color-hover-dark-side:   $black;
+$text-highlight-color-dark-side:      $black;
