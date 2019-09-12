@@ -1,30 +1,33 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { plots } from '../helpers';
 
-function generateRandomTitle() {
-  return 'Han Yolo: A Ransom Story';
-}
-
-const PlotTemplate = (props) => (
-  <div>
-    <h2 className="plot-title">{generateRandomTitle()}</h2>
+const PlotTemplate = ({ planet, starship, activePlot }) => (
+  <div className="plot-container">
+    <h2 className="plot-title mb-3">{plots[activePlot].title}</h2>
     <p>
-      In an effort to betray the resistance, Han Yolo kidnapped Princess Leia and fled to the planet
+      {plots[activePlot].description.intro}
       <span className="text-highlight">
-        {props.planet || ''}
+        {planet || ''}
       </span>
       .
     </p>
     <p>
-      During the wild pursuit he was chased through an astroid field, which left his
+      {plots[activePlot].description.middle}
       <span className="text-highlight">
-        {props.starship || ''}
+        {starship || ''}
       </span>
-      heavily damaged. He now demands 4.000.000 Rupiahs ransom in order to return Princess Leia.
     </p>
     <p>
-      With his ship damaged and the resistance on his heels, will he make it?
+      {plots[activePlot].description.end}
     </p>
   </div>
 );
+
+PlotTemplate.propTypes = {
+  planet: PropTypes.string.isRequired,
+  starship: PropTypes.string.isRequired,
+  activePlot: PropTypes.number.isRequired,
+};
 
 export default PlotTemplate;

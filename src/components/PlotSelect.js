@@ -1,22 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Select from 'react-select';
 import { capitalizeFirstLetter } from '../helpers';
 
-const PlotSelect = ({ resource, handleChange }) => (
-  <div className="form-group">
-    <label htmlFor={`select-${resource.name}`}>{capitalizeFirstLetter(resource.name)}</label>
-    <select
-      defaultValue={resource.name}
-      className="form-control"
-      id={`select-${resource.name}`}
-      key={resource.name}
-      onChange={handleChange}
-      data-statename={`${resource.name}Selected`}
-    >
-      {resource.data.map((item) => <option value={item.name} key={item.name}>{item.name}</option>)}
-    </select>
-  </div>
-);
+const PlotSelect = ({ resource, handleChange }) => {
+  const selectOptions = resource.data.map((item) => ({
+    value: item.name,
+    label: item.name,
+  }));
+
+  return (
+    <div className="form-group">
+      <label htmlFor={`select-${resource.name}`}>{capitalizeFirstLetter(resource.name)}</label>
+      <Select
+        className="plot-select"
+        options={selectOptions}
+        id={`select-${resource.name}`}
+        onChange={(val) => { handleChange({ target: { stateName: `${resource.name}Selected`, value: val.value } }); }}
+      />
+    </div>
+  );
+};
 
 PlotSelect.propTypes = {
   resource: PropTypes.shape({

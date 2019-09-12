@@ -8,8 +8,10 @@ class PlotGenerator extends React.Component {
   constructor() {
     super();
     this.state = {
-      resources: [],
+      activePlot: 0,
       isLoading: true,
+      resources: [],
+      showPlot: false,
     };
 
     this.resourceEndpoints = ['planets', 'starships'];
@@ -26,42 +28,45 @@ class PlotGenerator extends React.Component {
 
   handleChange = (event) => {
     this.setState({
-      [event.target.dataset.statename]: event.target.value,
+      [event.target.stateName]: event.target.value,
+    });
+  }
+
+  generatePlot = () => {
+    this.setState({
+      showPlot: true,
+      activePlot: Math.floor(Math.random() * Math.floor(3)),
     });
   }
 
   render({
-    resources, isLoading, planetsSelected, starshipsSelected,
+    resources, isLoading, planetsSelected, starshipsSelected, showPlot, activePlot,
   } = this.state) {
     return (
-      <div className="plot-generator">
-        <div className="alert alert-info text-center">
-          Choose from the available options and create your own plot!
-        </div>
-
+      <>
         { isLoading ? <LoadingSpinner /> : ''}
 
-        <div className="plot-inputs" hidden={isLoading}>
-          {
-            resources.map((resource, index) => (
-              <PlotSelect resource={resource} key={index} handleChange={this.handleChange} />
-            ))
-          }
+        <div className="plot-generator" hidden={isLoading}>
+          <div className="alert alert-info text-center">
+            Choose from the available options and create your own plot!
+          </div>
+
+          <div className="plot-inputs">
+            {
+              resources.map((resource, index) => (
+                <PlotSelect resource={resource} key={index} handleChange={this.handleChange} />
+              ))
+            }
+          </div>
+
+          <button type="button" className="main-button font-weight-bold" onClick={this.generatePlot}>
+            Generate Plot
+            <span role="img" className="ml-2" aria-label="lightbulb-emoji">💡</span>
+          </button>
+
+          { showPlot ? <PlotTemplate activePlot={activePlot} planet={planetsSelected} starship={starshipsSelected} /> : null }
         </div>
-
-        <div className="plot-container" hidden={isLoading}>
-          <PlotTemplate
-            planet={planetsSelected}
-            starship={starshipsSelected}
-          />
-        </div>
-
-        <button type="button" className="main-button font-weight-bold" hidden={isLoading}>
-          <span role="img" aria-label="angry-emoji">🤬 </span>
-          ROLL THE INTRO ALREADY
-        </button>
-
-      </div>
+      </>
     );
   }
 }
