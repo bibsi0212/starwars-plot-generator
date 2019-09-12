@@ -11,9 +11,9 @@ class App extends React.Component {
     };
   }
 
-  toggleDarkSide = () => {
+  toggleDarkSide = ({ isDarkSide } = this.state) => {
     this.setState({
-      isDarkSide: !this.state.isDarkSide,
+      isDarkSide: !isDarkSide,
     });
   }
 
