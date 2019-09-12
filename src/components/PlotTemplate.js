@@ -23,9 +23,14 @@ const PlotTemplate = ({ planet, starship, activePlot }) => (
   </div>
 );
 
+PlotTemplate.defaultProps = {
+  planet: 'no planet selected',
+  starship: 'no planet selected',
+};
+
 PlotTemplate.propTypes = {
-  planet: PropTypes.string.isRequired,
-  starship: PropTypes.string.isRequired,
+  planet: PropTypes.string,
+  starship: PropTypes.string,
   activePlot: PropTypes.number.isRequired,
 };
 

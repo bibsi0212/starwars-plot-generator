@@ -8,7 +8,7 @@ const Header = ({ isDarkSide, toggleDarkSide }) => (
     <button
       type="button"
       title="Click me I'm cool"
-      className="header-logo d-block"
+      className="header-logo"
       onClick={() => toggleDarkSide()}
     >
       {isDarkSide ? <StormTrooper /> : <C3PO />}

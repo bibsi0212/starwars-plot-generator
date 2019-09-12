@@ -1,8 +1,8 @@
 import React from 'react';
-import { getResourcesFromAPI, chooseRandomPlot } from '../helpers';
 import PlotTemplate from './PlotTemplate';
 import PlotSelect from './PlotSelect';
 import Error from './Error';
+import { getResourcesFromAPI, chooseRandomPlot } from '../helpers';
 import { ReactComponent as LoadingSpinner } from '../img/loader.svg';
 
 class PlotGenerator extends React.Component {
