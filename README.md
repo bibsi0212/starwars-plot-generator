@@ -1,4 +1,4 @@
-## StarWars Plot Creator
+## StarWars Plot Generator
 
 This is a small app that queries [SWAPI](https://swapi.co/) for resources that can be added to a plot. The app then generates a random plot using those attribtues.
 
