@@ -13,9 +13,8 @@ const getResource = (url, name, resources, resolve, reject) => {
         resolve(finalData);
       }
     })
-    .catch((error) => {
-      console.log(error);
-      reject('Something wrong. Please refresh the page and try again.');
+    .catch(() => {
+      reject('Could not process response. Are the endpoints correct?');
     });
 };
 
@@ -62,4 +61,8 @@ const plots = [
   },
 ];
 
-export { getResourcesFromAPI, capitalizeFirstLetter, plots };
+const chooseRandomPlot = () => Math.floor(Math.random() * Math.floor(plots.length));
+
+export {
+  getResourcesFromAPI, capitalizeFirstLetter, plots, chooseRandomPlot,
+};

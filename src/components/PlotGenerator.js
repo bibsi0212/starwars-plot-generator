@@ -1,7 +1,8 @@
 import React from 'react';
-import { getResourcesFromAPI } from '../helpers';
+import { getResourcesFromAPI, chooseRandomPlot } from '../helpers';
 import PlotTemplate from './PlotTemplate';
 import PlotSelect from './PlotSelect';
+import Error from './Error';
 import { ReactComponent as LoadingSpinner } from '../img/loader.svg';
 
 class PlotGenerator extends React.Component {
@@ -12,6 +13,7 @@ class PlotGenerator extends React.Component {
       isLoading: true,
       resources: [],
       showPlot: false,
+      error: false,
     };
 
     this.resourceEndpoints = ['planets', 'starships'];
@@ -23,6 +25,11 @@ class PlotGenerator extends React.Component {
         resources: results,
         isLoading: false,
       });
+    }).catch(() => {
+      this.setState({
+        error: true,
+        isLoading: false,
+      });
     });
   }
 
@@ -30,24 +37,28 @@ class PlotGenerator extends React.Component {
     this.setState({
       [event.target.stateName]: event.target.value,
     });
-  }
+  };
 
   generatePlot = () => {
     this.setState({
       showPlot: true,
-      activePlot: Math.floor(Math.random() * Math.floor(3)),
+      activePlot: chooseRandomPlot(),
     });
-  }
+  };
 
   render({
-    resources, isLoading, planetsSelected, starshipsSelected, showPlot, activePlot,
+    resources, isLoading, planetsSelected, starshipsSelected, showPlot, activePlot, error,
   } = this.state) {
+    if (error) {
+      return <Error />;
+    }
+
     return (
       <>
         { isLoading ? <LoadingSpinner /> : ''}
 
         <div className="plot-generator" hidden={isLoading}>
-          <div className="alert alert-info text-center">
+          <div className="alert alert-info text-center small">
             Choose from the available options and create your own plot!
           </div>
 
@@ -64,7 +75,17 @@ class PlotGenerator extends React.Component {
             <span role="img" className="ml-2" aria-label="lightbulb-emoji">💡</span>
           </button>
 
-          { showPlot ? <PlotTemplate activePlot={activePlot} planet={planetsSelected} starship={starshipsSelected} /> : null }
+          {
+            showPlot
+              ? (
+                <PlotTemplate
+                  activePlot={activePlot}
+                  planet={planetsSelected}
+                  starship={starshipsSelected}
+                />
+              )
+              : null
+            }
         </div>
       </>
     );
